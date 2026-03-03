@@ -65,6 +65,7 @@ The processing logic is contained in the pkg/processing package. It contains 3 f
 * model.go contains the database model for a record
 * processing.go handles the processing logic itself, there is one public function called ProcessScan which takes a scanning.Scan object and returns a processing.IPRecord object and a possible error. This function acts as a simple wrapper around the two private functions which handle the processing of the v1 and v2 scan records respectively. The processing logic for the different versions is separated into their own functions in order to allow easy extensibility and testing, and the functions themselves are private because the end user shouldn't need to concern themselves with the version so long as the data is valid.
 The tests cover the most common cases: Good data of either data type being processed correctly via the public function, as well as bad data returning an error. The tests also cover the private functions for handling each data type specifically, to ensure that we error appropriately in the event that the wrong processing function is somehow called.
+The tests can be called by running `go test ./pkg/processing/` from this directory.
 
 ### Processor Command
 To run the processor, you can use the following command: `PUBSUB_EMULATOR_HOST=localhost:8085 go run cmd/processor/main.go` from this directory.
